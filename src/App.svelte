@@ -1,30 +1,53 @@
 <script lang="ts">
-	export let name: string;
+	import { store, Tasks } from "./store";
+	import TodosLists from "./UiComponents/TodosLists.svelte";
+
+	export let title: string;
+
+	let todoListName: string;
+
+	function createTodoList() {
+		store.update((store) => {
+			store[todoListName] = new Tasks();
+			return store;
+		});
+		todoListName = "";
+	}
+
+	// $: {
+	// 	console.log($store);
+	// }
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<div class="w3-container w3-teal w3-padding-64">
+		<h1 class="w3-center">{title}!</h1>
+
+		<div class="w3-container w3-center">
+			<input
+				maxlength="30"
+				name="list-name"
+				class="w3-input td-lists-inpt w3-leftbar w3-border-bottom w3-border-white w3-teal"
+				type="text"
+				placeholder="list name..."
+				bind:value={todoListName}
+			/>
+
+			<button
+				class="w3-button w3-round w3-margin w3-border w3-border-white w3-ripple w3-hover-white"
+				on:click={createTodoList}>Create list {"🔥"}</button
+			>
+		</div>
+	</div>
 </main>
+<TodosLists />
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	.td-lists-inpt {
+		max-width: 300px;
+		display: inline-block;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	.w3-button {
+		cursor: var(--cursor);
 	}
 </style>
