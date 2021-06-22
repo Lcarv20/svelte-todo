@@ -1,6 +1,12 @@
 <script lang="ts">
-	import { store, Tasks } from "./store";
+	import { store, Tasks, dataTest } from "./store";
+	import { localStorageInit } from "./utils/userStore";
 	import TodosLists from "./Components/TodosLists.svelte";
+
+	let userData = localStorageInit();
+	console.log(userData);
+
+	store.set({ ...userData });
 
 	export let title: string;
 
@@ -14,9 +20,7 @@
 		todoListName = "";
 	}
 
-	// $: {
-	// 	console.log($store);
-	// }
+	$: localStorage.setItem("todosData", JSON.stringify($store));
 </script>
 
 <main>
