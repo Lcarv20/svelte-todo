@@ -27,7 +27,7 @@ test.done = ["Study hard", "Read more"];
 test.notDone = ["Read about micro frontend", "learn angular"];
 
 store.set({
-	test,
+	"The test TODOS list": test,
 });
 
 export { store };

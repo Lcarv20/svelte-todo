@@ -15,8 +15,10 @@
 	onDestroy(unsub);
 </script>
 
+<!-- Lists of TODOS colletion homepage -->
+
 <div class="w3-center w3-padding">
-	{#each lists as list}
+	{#each lists as list (list)}
 		<Card listName={list} />
 	{/each}
 </div>

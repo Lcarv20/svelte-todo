@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { store, Tasks } from "./store";
-	import TodosLists from "./UiComponents/TodosLists.svelte";
+	import TodosLists from "./Components/TodosLists.svelte";
 
 	export let title: string;
 
@@ -31,6 +31,7 @@
 				type="text"
 				placeholder="list name..."
 				bind:value={todoListName}
+				on:keydown={(e) => e.key === "Enter" && createTodoList()}
 			/>
 
 			<button
