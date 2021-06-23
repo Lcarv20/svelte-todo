@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { store, Tasks, dataTest } from "./store";
+	import { store, Tasks } from "./store";
 	import { localStorageInit } from "./utils/userStore";
 	import TodosLists from "./Components/TodosLists.svelte";
 
@@ -13,6 +13,11 @@
 	let todoListName: string;
 
 	function createTodoList() {
+		if ($store[todoListName]) {
+			alert("This list already exists");
+			todoListName = "";
+			return;
+		}
 		store.update((store) => {
 			store[todoListName] = new Tasks();
 			return store;
